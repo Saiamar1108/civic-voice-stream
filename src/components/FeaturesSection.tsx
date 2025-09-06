@@ -74,7 +74,7 @@ export const FeaturesSection = () => {
             <span className="block text-primary">Civic Engagement</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            CivicConnect provides modern tools to bridge the gap between citizens and local government, 
+            UrbanX provides modern tools to bridge the gap between citizens and local government, 
             making civic participation easier and more effective than ever.
           </p>
         </div>
@@ -88,25 +88,25 @@ export const FeaturesSection = () => {
               </h3>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
                 Our platform connects citizens directly with local departments, ensuring every voice is heard 
-                and every issue gets the attention it deserves. Join thousands of engaged citizens making 
+                and every issue gets the attention it deserves. Join engaged citizens making 
                 a real difference in their communities.
               </p>
               <div className="grid grid-cols-2 gap-4 mb-6">
                 <div className="text-center p-4 bg-gradient-subtle rounded-lg">
-                  <div className="text-2xl font-bold text-primary">2,847</div>
-                  <div className="text-sm text-muted-foreground">Issues Resolved</div>
+                  <div className="text-2xl font-bold text-primary">Ready</div>
+                  <div className="text-sm text-muted-foreground">To Serve</div>
                 </div>
                 <div className="text-center p-4 bg-gradient-subtle rounded-lg">
-                  <div className="text-2xl font-bold text-accent">48hrs</div>
-                  <div className="text-sm text-muted-foreground">Avg Response Time</div>
+                  <div className="text-2xl font-bold text-accent">24hrs</div>
+                  <div className="text-sm text-muted-foreground">Support Available</div>
                 </div>
                 <div className="text-center p-4 bg-gradient-subtle rounded-lg">
                   <div className="text-2xl font-bold text-primary">12</div>
                   <div className="text-sm text-muted-foreground">Connected Departments</div>
                 </div>
                 <div className="text-center p-4 bg-gradient-subtle rounded-lg">
-                  <div className="text-2xl font-bold text-accent">95%</div>
-                  <div className="text-sm text-muted-foreground">Satisfaction Rate</div>
+                  <div className="text-2xl font-bold text-accent">New</div>
+                  <div className="text-sm text-muted-foreground">Platform Launch</div>
                 </div>
               </div>
             </div>

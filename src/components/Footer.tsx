@@ -38,9 +38,9 @@ export const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-lg">C</span>
+                <span className="text-primary-foreground font-bold text-lg">U</span>
               </div>
-              <span className="text-xl font-bold text-background">CivicConnect</span>
+              <span className="text-xl font-bold text-background">UrbanX</span>
             </div>
             <p className="text-background/80 text-sm leading-relaxed">
               Bridging the gap between citizens and local government through 
@@ -119,7 +119,7 @@ export const Footer = () => {
               </div>
               <div className="flex items-center space-x-2 text-sm">
                 <Mail className="w-4 h-4 text-background/60" />
-                <span className="text-background/80">support@civicconnect.gov</span>
+                <span className="text-background/80">support@urbanx.gov</span>
               </div>
             </div>
 
@@ -145,7 +145,7 @@ export const Footer = () => {
         {/* Bottom Section */}
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <div className="text-sm text-background/60">
-            © 2024 CivicConnect. All rights reserved. Built with ❤️ for better communities.
+            © 2024 UrbanX. All rights reserved. Built with ❤️ for better communities.
           </div>
           <div className="flex items-center space-x-4 text-xs text-background/60">
             <span>Emergency: 911</span>

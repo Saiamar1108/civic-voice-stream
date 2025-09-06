@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { AlertCircle, MapPin, Clock } from "lucide-react";
-import heroImage from "@/assets/civic-hero.jpg";
+import heroImage from "@/assets/indian-civic-hero.jpg";
 
 export const HeroSection = () => {
   return (
@@ -9,7 +9,7 @@ export const HeroSection = () => {
       <div className="absolute inset-0 z-0">
         <img 
           src={heroImage} 
-          alt="Modern civic building" 
+          alt="Modern Indian government building" 
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/70"></div>
@@ -31,16 +31,16 @@ export const HeroSection = () => {
           {/* Stats */}
           <div className="flex flex-wrap gap-6 mb-10">
             <div className="flex items-center space-x-2 bg-primary-foreground/10 rounded-lg px-4 py-2">
-              <AlertCircle className="w-5 h-5 text-accent-glow" />
-              <span className="font-semibold">2,847 Issues Resolved</span>
+              <MapPin className="w-5 h-5 text-accent-glow" />
+              <span className="font-semibold">12 Departments Connected</span>
             </div>
             <div className="flex items-center space-x-2 bg-primary-foreground/10 rounded-lg px-4 py-2">
               <Clock className="w-5 h-5 text-accent-glow" />
-              <span className="font-semibold">48h Average Resolution</span>
+              <span className="font-semibold">24/7 Support Available</span>
             </div>
             <div className="flex items-center space-x-2 bg-primary-foreground/10 rounded-lg px-4 py-2">
-              <MapPin className="w-5 h-5 text-accent-glow" />
-              <span className="font-semibold">12 Departments Connected</span>
+              <AlertCircle className="w-5 h-5 text-accent-glow" />
+              <span className="font-semibold">Ready to Serve Citizens</span>
             </div>
           </div>
 

@@ -13,9 +13,9 @@ export const Header = () => {
           {/* Logo */}
           <div className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-lg">C</span>
+              <span className="text-primary-foreground font-bold text-lg">U</span>
             </div>
-            <span className="text-xl font-bold text-foreground">CivicConnect</span>
+            <span className="text-xl font-bold text-foreground">UrbanX</span>
           </div>
 
           {/* Desktop Navigation */}
