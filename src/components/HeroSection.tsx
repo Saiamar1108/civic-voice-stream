@@ -52,7 +52,7 @@ export const HeroSection = () => {
             <Button 
               variant="outline" 
               size="lg" 
-              className="text-lg px-8 py-4 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+              className="text-lg px-8 py-4 border-white/40 text-white hover:bg-white hover:text-primary bg-white/10"
             >
               Track Existing Report
             </Button>
