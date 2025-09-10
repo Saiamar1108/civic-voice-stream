@@ -1,53 +1,52 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import {
-  auth,
-  googleProvider,
-  sendPhoneOtp,
-} from "@/lib/firebase";
-import {
-  onAuthStateChanged,
-  signInWithPopup,
-  signOut,
-  type User,
-} from "firebase/auth";
+import { supabase } from "@/lib/supabase";
 
 type AuthContextValue = {
-  user: User | null;
+  user: any;
   loading: boolean;
   signInWithGoogle: () => Promise<void>;
-  startPhoneSignIn: (e164Phone: string) => Promise<import("firebase/auth").ConfirmationResult>;
-  confirmPhoneCode: (confirmation: import("firebase/auth").ConfirmationResult, code: string) => Promise<void>;
+  startPhoneSignIn: (e164Phone: string) => Promise<void>;
+  confirmPhoneCode: (code: string, phone?: string) => Promise<void>;
   signOutUser: () => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<any | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (u) => {
-      setUser(u);
+    supabase.auth.getUser().then(({ data }) => {
+      setUser(data.user ?? null);
       setLoading(false);
     });
-    return () => unsub();
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+    return () => {
+      listener.subscription.unsubscribe();
+    };
   }, []);
 
   const value = useMemo<AuthContextValue>(() => ({
     user,
     loading,
     async signInWithGoogle() {
-      await signInWithPopup(auth, googleProvider);
+      const { error } = await supabase.auth.signInWithOAuth({ provider: "google" });
+      if (error) throw error;
     },
     async startPhoneSignIn(e164Phone: string) {
-      return sendPhoneOtp(e164Phone);
+      const { error } = await supabase.auth.signInWithOtp({ phone: e164Phone });
+      if (error) throw error;
     },
-    async confirmPhoneCode(confirmation, code) {
-      await confirmation.confirm(code);
+    async confirmPhoneCode(code: string, phone?: string) {
+      const { error } = await supabase.auth.verifyOtp({ token: code, type: "sms", phone });
+      if (error) throw error;
     },
     async signOutUser() {
-      await signOut(auth);
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
     },
   }), [user, loading]);
 

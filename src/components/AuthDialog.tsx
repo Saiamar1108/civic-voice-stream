@@ -9,7 +9,7 @@ export const AuthDialog = () => {
   const { signInWithGoogle, startPhoneSignIn, confirmPhoneCode } = useAuth();
   const [open, setOpen] = useState(false);
   const [phone, setPhone] = useState("");
-  const [confirmation, setConfirmation] = useState<import("firebase/auth").ConfirmationResult | null>(null);
+  const [awaitingCode, setAwaitingCode] = useState(false);
   const [code, setCode] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -19,8 +19,8 @@ export const AuthDialog = () => {
     setSubmitting(true);
     try {
       // Expecting E.164 like +919876543210
-      const conf = await startPhoneSignIn(phone);
-      setConfirmation(conf);
+      await startPhoneSignIn(phone);
+      setAwaitingCode(true);
     } catch (e: any) {
       setError(e?.message ?? "Failed to send OTP");
     } finally {
@@ -29,11 +29,10 @@ export const AuthDialog = () => {
   }
 
   async function handleConfirm() {
-    if (!confirmation) return;
     setError(null);
     setSubmitting(true);
     try {
-      await confirmPhoneCode(confirmation, code);
+      await confirmPhoneCode(code, phone);
       setOpen(false);
     } catch (e: any) {
       setError(e?.message ?? "Invalid code");
@@ -72,8 +71,8 @@ export const AuthDialog = () => {
           <Separator />
           <div className="space-y-2">
             <label className="text-sm">Mobile number (E.164, e.g. +919876543210)</label>
-            <Input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+91..." disabled={!!confirmation || submitting} />
-            {!confirmation ? (
+            <Input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+91..." disabled={awaitingCode || submitting} />
+            {!awaitingCode ? (
               <Button onClick={handleStartPhone} disabled={submitting || !phone} className="w-full">Send OTP</Button>
             ) : (
               <div className="space-y-2">
