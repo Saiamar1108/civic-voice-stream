@@ -22,7 +22,8 @@ export const AuthDialog = () => {
       await startPhoneSignIn(phone);
       setAwaitingCode(true);
     } catch (e: any) {
-      setError(e?.message ?? "Failed to send OTP");
+      const msg = e?.message || e?.error_description || e?.error || (typeof e === "string" ? e : JSON.stringify(e));
+      setError(msg || "Failed to send OTP");
     } finally {
       setSubmitting(false);
     }
@@ -35,7 +36,8 @@ export const AuthDialog = () => {
       await confirmPhoneCode(code, phone);
       setOpen(false);
     } catch (e: any) {
-      setError(e?.message ?? "Invalid code");
+      const msg = e?.message || e?.error_description || e?.error || (typeof e === "string" ? e : JSON.stringify(e));
+      setError(msg || "Invalid code");
     } finally {
       setSubmitting(false);
     }
@@ -48,7 +50,8 @@ export const AuthDialog = () => {
       await signInWithGoogle();
       setOpen(false);
     } catch (e: any) {
-      setError(e?.message ?? "Google sign-in failed");
+      const msg = e?.message || e?.error_description || e?.error || (typeof e === "string" ? e : JSON.stringify(e));
+      setError(msg || "Google sign-in failed");
     } finally {
       setSubmitting(false);
     }

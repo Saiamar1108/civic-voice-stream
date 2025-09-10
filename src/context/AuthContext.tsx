@@ -33,7 +33,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     user,
     loading,
     async signInWithGoogle() {
-      const { error } = await supabase.auth.signInWithOAuth({ provider: "google" });
+      const redirectTo = typeof window !== "undefined" ? window.location.origin : undefined;
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          redirectTo,
+          queryParams: {
+            prompt: "select_account",
+          },
+        },
+      });
       if (error) throw error;
     },
     async startPhoneSignIn(e164Phone: string) {
