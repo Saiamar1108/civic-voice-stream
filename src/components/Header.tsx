@@ -2,9 +2,13 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, FileText, BarChart3 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { AuthDialog } from "@/components/AuthDialog";
+import { useAuth } from "@/context/AuthContext";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, signOutUser } = useAuth();
 
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
@@ -44,6 +48,19 @@ export const Header = () => {
               <FileText className="w-4 h-4" />
               Report Issue
             </Button>
+            {user ? (
+              <div className="flex items-center gap-2">
+                <Avatar className="h-8 w-8">
+                  <AvatarFallback>{(user.displayName?.[0] || user.phoneNumber?.slice(-2) || "U").toUpperCase()}</AvatarFallback>
+                </Avatar>
+                <span className="text-sm text-muted-foreground">
+                  {user.displayName || user.phoneNumber || user.email}
+                </span>
+                <Button variant="ghost" size="sm" onClick={signOutUser}>Sign out</Button>
+              </div>
+            ) : (
+              <AuthDialog />
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -85,6 +102,13 @@ export const Header = () => {
               <FileText className="w-4 h-4" />
               Report Issue
             </Button>
+            <div className="pt-2">
+              {user ? (
+                <Button variant="ghost" size="sm" className="w-full" onClick={signOutUser}>Sign out</Button>
+              ) : (
+                <AuthDialog />
+              )}
+            </div>
           </div>
         </div>
       </div>

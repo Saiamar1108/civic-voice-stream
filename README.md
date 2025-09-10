@@ -60,6 +60,29 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
+## Firebase Authentication Setup
+
+This project supports sign-in with Google and mobile number (OTP) using Firebase Auth.
+
+1. Create a Firebase project and enable:
+   - Authentication → Sign-in method → Google
+   - Authentication → Sign-in method → Phone
+2. Add a Web App in your Firebase project to get configuration values.
+3. Create a `.env` file in the project root with the following keys and values from Firebase:
+
+```
+VITE_FIREBASE_API_KEY=your_api_key
+VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
+VITE_FIREBASE_PROJECT_ID=your_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_bucket
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+VITE_FIREBASE_APP_ID=your_app_id
+```
+
+4. For phone auth, Firebase requires reCAPTCHA. We include an invisible container in `index.html` with id `recaptcha-container`.
+
+After setting env vars, restart the dev server.
+
 ## How can I deploy this project?
 
 Simply open [Lovable](https://lovable.dev/projects/a20c0865-4e20-4477-b6a5-58e4a726798c) and click on Share -> Publish.
