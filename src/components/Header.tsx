@@ -30,7 +30,7 @@ export const Header = () => {
             <a href="#track" className="text-muted-foreground hover:text-primary transition-smooth">
               Track Status
             </a>
-            <a href="#dashboard" className="text-muted-foreground hover:text-primary transition-smooth">
+            <a href="/dashboard" className="text-muted-foreground hover:text-primary transition-smooth">
               Dashboard
             </a>
             <a href="#about" className="text-muted-foreground hover:text-primary transition-smooth">
@@ -40,9 +40,11 @@ export const Header = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center space-x-3">
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" asChild>
+              <a href="/dashboard">
               <BarChart3 className="w-4 h-4" />
               Dashboard
+              </a>
             </Button>
             <Button variant="civic" size="sm">
               <FileText className="w-4 h-4" />
@@ -86,7 +88,7 @@ export const Header = () => {
             <a href="#track" className="text-muted-foreground hover:text-primary py-2 transition-smooth">
               Track Status
             </a>
-            <a href="#dashboard" className="text-muted-foreground hover:text-primary py-2 transition-smooth">
+            <a href="/dashboard" className="text-muted-foreground hover:text-primary py-2 transition-smooth">
               Dashboard
             </a>
             <a href="#about" className="text-muted-foreground hover:text-primary py-2 transition-smooth">
@@ -94,9 +96,11 @@ export const Header = () => {
             </a>
           </nav>
           <div className="flex flex-col space-y-2 pt-3 border-t border-border">
-            <Button variant="outline" size="sm" className="w-full">
+            <Button variant="outline" size="sm" className="w-full" asChild>
+              <a href="/dashboard">
               <BarChart3 className="w-4 h-4" />
               Dashboard
+              </a>
             </Button>
             <Button variant="civic" size="sm" className="w-full">
               <FileText className="w-4 h-4" />
