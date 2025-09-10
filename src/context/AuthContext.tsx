@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { supabase } from "@/lib/supabase";
+import { supabase } from "@/lib/supabaseClient";
 
 type AuthContextValue = {
   user: any;
@@ -7,6 +7,7 @@ type AuthContextValue = {
   signInWithGoogle: () => Promise<void>;
   startPhoneSignIn: (e164Phone: string) => Promise<void>;
   confirmPhoneCode: (code: string, phone?: string) => Promise<void>;
+  mockLogin: () => void;
   signOutUser: () => Promise<void>;
 };
 
@@ -52,6 +53,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     async confirmPhoneCode(code: string, phone?: string) {
       const { error } = await supabase.auth.verifyOtp({ token: code, type: "sms", phone });
       if (error) throw error;
+    },
+    mockLogin() {
+      setUser({ id: "demo_user", email: "demo@urbanx.com", user_metadata: { name: "Demo User" } });
     },
     async signOutUser() {
       const { error } = await supabase.auth.signOut();
