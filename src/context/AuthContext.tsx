@@ -4,6 +4,7 @@ import { supabase } from "@/lib/supabaseClient";
 type AuthContextValue = {
   user: any;
   loading: boolean;
+  isAuthority: boolean;
   signInWithGoogle: () => Promise<void>;
   startPhoneSignIn: (e164Phone: string) => Promise<void>;
   confirmPhoneCode: (code: string, phone?: string) => Promise<void>;
@@ -30,9 +31,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     };
   }, []);
 
+  const isAuthority = Boolean(
+    (user as any)?.user_metadata?.role === "authority" ||
+    (user as any)?.app_metadata?.role === "authority"
+  );
+
   const value = useMemo<AuthContextValue>(() => ({
     user,
     loading,
+    isAuthority,
     async signInWithGoogle() {
       const redirectTo = typeof window !== "undefined" ? window.location.origin : undefined;
       const { error } = await supabase.auth.signInWithOAuth({
@@ -55,13 +62,18 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       if (error) throw error;
     },
     mockLogin() {
-      setUser({ id: "demo_user", email: "demo@urbanx.com", user_metadata: { name: "Demo User" } });
+      setUser({
+        id: "demo_user",
+        email: "demo@urbanx.com",
+        user_metadata: { name: "Demo User", role: "authority" },
+        app_metadata: { role: "authority" },
+      });
     },
     async signOutUser() {
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
     },
-  }), [user, loading]);
+  }), [user, loading, isAuthority]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

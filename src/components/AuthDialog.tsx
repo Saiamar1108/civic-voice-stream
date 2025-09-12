@@ -6,7 +6,7 @@ import { Separator } from "@/components/ui/separator";
 import { useAuth } from "@/context/AuthContext";
 
 export const AuthDialog = () => {
-  const { signInWithGoogle, startPhoneSignIn, confirmPhoneCode } = useAuth();
+  const { signInWithGoogle, startPhoneSignIn, confirmPhoneCode, mockLogin } = useAuth();
   const [open, setOpen] = useState(false);
   const [phone, setPhone] = useState("");
   const [awaitingCode, setAwaitingCode] = useState(false);
@@ -57,6 +57,13 @@ export const AuthDialog = () => {
     }
   }
 
+  function handleDemoAuthority() {
+    mockLogin();
+    setOpen(false);
+    // redirect to dashboard
+    window.location.href = "/dashboard";
+  }
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -84,6 +91,10 @@ export const AuthDialog = () => {
               </div>
             )}
           </div>
+          <Separator />
+          <Button variant="secondary" className="w-full" onClick={handleDemoAuthority}>
+            Continue as Demo Authority (Fallback)
+          </Button>
         </div>
       </DialogContent>
     </Dialog>
